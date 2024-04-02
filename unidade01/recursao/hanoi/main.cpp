@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int hanoi(int numDiscs, char origin, char destiny, char auxiliary)
+void hanoi(int numDiscs, char origin, char destiny, char auxiliary)
 {
     if (numDiscs == 0)
     {
