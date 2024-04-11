@@ -1,0 +1,1 @@
+bool verificaPrimo(int numero);
