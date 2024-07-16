@@ -1,0 +1,151 @@
+name: Autograding Tests
+'on':
+- push
+- workflow_dispatch
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: atividade_01_test_01
+      id: atividade_01_test_01
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_01_test_01
+        setup-command: g++ -o atividade-01/main atividade-01/main.cpp
+        command: "./atividade-01/main"
+        input: 123
+        expected-output: '6'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_01_test_02
+      id: atividade_01_test_02
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_01_test_02
+        setup-command: g++ -o atividade-01/main atividade-01/main.cpp
+        command: "./atividade-01/main"
+        input: 12345
+        expected-output: '15'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_01_test_03
+      id: atividade_01_test_03
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_01_test_03
+        setup-command: g++ -o atividade-01/main atividade-01/main.cpp
+        command: "./atividade-01/main"
+        input: 999999999
+        expected-output: '81'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_02_test_01
+      id: atividade_02_test_01
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_02_test_01
+        setup-command: make -C atividade-02
+        command: "./atividade-02/main"
+        input: 7
+        expected-output: '111'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_02_test_02
+      id: atividade_02_test_02
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_02_test_02
+        setup-command: make -C atividade-02
+        command: "./atividade-02/main"
+        input: 10
+        expected-output: '1010'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_02_test_03
+      id: atividade_02_test_03
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_02_test_03
+        setup-command: make -C atividade-02
+        command: "./atividade-02/main"
+        input: 512
+        expected-output: '1000000000'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_03_test_01
+      id: atividade_03_test_01
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_03_test_01
+        setup-command: make -C atividade-03
+        command: "./atividade-03/main"
+        input: 2
+        expected-output: 'O número 2 é primo'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_03_test_02
+      id: atividade_03_test_02
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_03_test_02
+        setup-command: make -C atividade-03
+        command: "./atividade-03/main"
+        input: 7
+        expected-output: 'O número 7 é primo'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_03_test_03
+      id: atividade_03_test_03
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_03_test_03
+        setup-command: make -C atividade-03
+        command: "./atividade-03/main"
+        input: 12
+        expected-output: 'O número 12 não é primo'
+        comparison-method: contains
+        timeout: 2
+        max-score: 11
+    - name: atividade_03_test_04
+      id: atividade_03_test_04
+      uses: education/autograding-io-grader@v1
+      with:
+        test-name: atividade_03_test_04
+        setup-command: make -C atividade-03
+        command: "./atividade-03/main"
+        input: 1
+        expected-output: 'O número 1 não é primo'
+        comparison-method: contains
+        timeout: 2
+        max-score: 1
+    - name: Autograding Reporter
+      uses: education/autograding-grading-reporter@v1
+      env:
+        ATIVIDADE_01_TEST_01_RESULTS: "${{steps.atividade_01_test_01.outputs.result}}"
+        ATIVIDADE_01_TEST_02_RESULTS: "${{steps.atividade_01_test_02.outputs.result}}"
+        ATIVIDADE_01_TEST_03_RESULTS: "${{steps.atividade_01_test_03.outputs.result}}"
+        ATIVIDADE_02_TEST_01_RESULTS: "${{steps.atividade_02_test_01.outputs.result}}"
+        ATIVIDADE_02_TEST_02_RESULTS: "${{steps.atividade_02_test_02.outputs.result}}"
+        ATIVIDADE_02_TEST_03_RESULTS: "${{steps.atividade_02_test_03.outputs.result}}"
+        ATIVIDADE_03_TEST_01_RESULTS: "${{steps.atividade_03_test_01.outputs.result}}"
+        ATIVIDADE_03_TEST_02_RESULTS: "${{steps.atividade_03_test_02.outputs.result}}"
+        ATIVIDADE_03_TEST_03_RESULTS: "${{steps.atividade_03_test_03.outputs.result}}"
+        ATIVIDADE_03_TEST_04_RESULTS: "${{steps.atividade_03_test_04.outputs.result}}"
+      with:
+        runners: atividade_01_test_01,atividade_01_test_02,atividade_01_test_03,atividade_02_test_01,atividade_02_test_02,atividade_02_test_03,atividade_03_test_01,atividade_03_test_02,atividade_03_test_03,atividade_03_test_04
