@@ -18,7 +18,7 @@ public:
     Tempo operator-(const Tempo &t) const;
     Tempo operator*(int value);
     void operator+=(const Tempo &t);
-    Tempo operator-=(const Tempo &t) const;
+    void operator-=(const Tempo &t);
 
 
     void Exibir() const;

@@ -4,7 +4,7 @@ int main(){
     Tempo t1 = {3, 35};
     Tempo t2 = {2, 40};
     Tempo t3 = {5, 55};
-    Tempo t4;
+    Tempo t4 = {4, 45};
 
     t1.Exibir();
 
@@ -18,7 +18,7 @@ int main(){
 
     cout << endl;
 
-    t4 += t1;
+    t4 -= t1;
     t4.Exibir();
 
     cout << endl;

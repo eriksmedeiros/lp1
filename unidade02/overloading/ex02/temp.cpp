@@ -70,6 +70,16 @@ void Tempo::operator+=(const Tempo &t)
     min %= 60;
 }
 
+void Tempo::operator-=(const Tempo &t)
+{
+    horas -= t.horas;
+    min -= t.min;
+
+    // minutos excedentes viram horas
+    horas += min / 60;
+    min %= 60;
+}
+
 void Tempo::Exibir() const {
     cout << horas << " horas, " << min << " minutos";
 }
