@@ -1,1 +1,1 @@
-# lp1
+Estudos pessoais para a disciplina de IMD0030 - LINGUAGEM DE PROGRAMAÇÃO I.
